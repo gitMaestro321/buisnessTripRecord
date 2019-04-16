@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.lab.software.engineering.businesstriporder.entity.Employee; 
 
 @Repository
-public interface EmployeeDAO extends JpaRepository<Employee, Integer> {
+public interface EmployeeDAO extends JpaRepository<Employee, Long> {
 	
 }
