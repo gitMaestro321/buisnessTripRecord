@@ -4,11 +4,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
 
-
-/**
- * The persistent class for the BILL database table.
- * 
- */
+ 
 @Entity
 @NamedQuery(name="Bill.findAll", query="SELECT b FROM Bill b")
 public class Bill implements Serializable {
@@ -32,6 +28,7 @@ public class Bill implements Serializable {
 	private TravelOrder travelOrder;
 
 	public Bill() {
+		
 	}
 
 	public long getId() {

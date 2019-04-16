@@ -11,31 +11,27 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lab.software.engineering.businesstriporder.entity.Vehicle;
-import com.lab.software.engineering.businesstriporder.service.VehicleService;
+import com.lab.software.engineering.businesstriporder.entity.Employee;
+import com.lab.software.engineering.businesstriporder.service.EmployeeService;
+ 
 
 @RestController
 @RequestMapping("/api")
-public class VehicleRestController {
+public class EmployeeRestController {
 	
 	@Autowired
-	private VehicleService vehicleService;
-	
-	
-	@GetMapping("/vehicles")
-	public List<Vehicle> findAll(){
-		return vehicleService.findAll();
+	private EmployeeService employeeService;
+	 
+	@GetMapping("/employees")
+	public List<Employee> findAll(){
+		return employeeService.findAll();
 	}
 
-	@RequestMapping(value = "/addvehicle", method = RequestMethod.POST,   produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@RequestMapping(value = "/addemployee", method = RequestMethod.POST,   produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	   @ResponseBody()
-	   public Vehicle addNewVehicle(@RequestBody Vehicle vehicle) {
-	       return this.vehicleService.addVehicle(vehicle);
+	   public Employee addNewEmployee(@RequestBody Employee employee) {
+	       return this.employeeService.addEmployee(employee);
     }
-	
-	
-	
-	
 	
 	
 }

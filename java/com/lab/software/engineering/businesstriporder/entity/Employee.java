@@ -2,45 +2,72 @@ package com.lab.software.engineering.businesstriporder.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.math.BigDecimal;
 import java.util.List;
 
-
-/**
- * The persistent class for the EMPLOYEE database table.
- * 
- */
+ 
 @Entity
 @NamedQuery(name="Employee.findAll", query="SELECT e FROM Employee e")
 public class Employee implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private long id;
 
+	@Column(name="EMAIL")
 	private String email;
 
 	@Column(name="FIRST_NAME")
 	private String firstName;
 
 	@Column(name="IS_ACTIVE")
-	private BigDecimal isActive;
+	private boolean isActive;
 
 	@Column(name="LAST_NAME")
 	private String lastName;
-
+	
+	@Column(name="PASS")
 	private String pass;
 
 	//bi-directional many-to-one association to Authority
-	@ManyToOne
+	
+	
+	@ManyToOne 
 	private Authority authority;
 
-	//bi-directional many-to-one association to TravelOrder
+	//bi-directional many-to-one association to TravelOrder 
 	@OneToMany(mappedBy="employee")
+	
 	private List<TravelOrder> travelOrders;
 
 	public Employee() {
-	}
+	} 
+
+	public Employee(long id, String email, String firstName, boolean isActive, String lastName, String pass,
+			Authority authority, List<TravelOrder> travelOrders) { 
+		this.id = id;
+		this.email = email;
+		this.firstName = firstName;
+		this.isActive = isActive;
+		this.lastName = lastName;
+		this.pass = pass;
+		this.authority = authority;
+		this.travelOrders = travelOrders;
+	} 
+	public Employee(String email, String firstName, boolean isActive, String lastName, String pass, Authority authority,
+			List<TravelOrder> travelOrders) { 
+		this.email = email;
+		this.firstName = firstName;
+		this.isActive = isActive;
+		this.lastName = lastName;
+		this.pass = pass;
+		this.authority = authority;
+		this.travelOrders = travelOrders;
+	} 
 
 	public long getId() {
 		return this.id;
@@ -66,11 +93,11 @@ public class Employee implements Serializable {
 		this.firstName = firstName;
 	}
 
-	public BigDecimal getIsActive() {
+	public boolean getIsActive() {
 		return this.isActive;
 	}
 
-	public void setIsActive(BigDecimal isActive) {
+	public void setIsActive(boolean isActive) {
 		this.isActive = isActive;
 	}
 

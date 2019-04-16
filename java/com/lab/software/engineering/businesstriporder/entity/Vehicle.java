@@ -40,6 +40,7 @@ public class Vehicle implements Serializable {
 	@Column(name="LICENCE_NUM")
 	private String licenceNum;
 
+	@Column(name="MODEL")
 	private String model;
 
 	@Column(name="VEHICLE_NUM")

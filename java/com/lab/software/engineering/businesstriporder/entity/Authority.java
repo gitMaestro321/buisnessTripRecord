@@ -2,6 +2,9 @@ package com.lab.software.engineering.businesstriporder.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 
@@ -14,19 +17,24 @@ import java.util.List;
 public class Authority implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
+	@Id 
 	private long id;
 
-	@Column(name="\"ROLE\"")
+	@Column(name="ROLE_TITLE")
 	private String role;
 
 	//bi-directional many-to-one association to Employee
 	@OneToMany(mappedBy="authority")
+	@JsonIgnore
 	private List<Employee> employees;
 
 	public Authority() {
 	}
-
+	
+	public Authority(long id) {
+		this.id = id;
+	}
+	 
 	public long getId() {
 		return this.id;
 	}
