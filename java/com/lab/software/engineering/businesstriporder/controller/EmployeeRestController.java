@@ -32,12 +32,13 @@ public class EmployeeRestController {
 	}
 
 	@RequestMapping(value = "/addemployee", method = RequestMethod.POST,   produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	   @ResponseBody()
+	@ResponseStatus(HttpStatus.CREATED)
+	@ResponseBody()
 	   public Employee addNewEmployee(@RequestBody Employee employee) {
 	       return this.employeeService.addEmployee(employee);
     }
 	
-	@RequestMapping(value = "/updateemployee/{id}", method = RequestMethod.PUT,   produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@RequestMapping(value = "/updateemployee/{id}", method = RequestMethod.PUT)
 	   @ResponseBody()
 	   public Employee updateEmployee(@PathVariable ("id")  int id) {
 		   Optional<Employee> employee = employeeService.findById(id); 
@@ -46,6 +47,18 @@ public class EmployeeRestController {
 	       return employee.get();
 	} 
 	
+	
+	//updates the employee when the id is passed through the method parameter 
+	@RequestMapping(value = "/updateemployee", method = RequestMethod.PUT)
+	@ResponseStatus(HttpStatus.ACCEPTED)
+	   @ResponseBody()
+	   public void updateEmployee(@RequestBody Employee emp) { 
+	       employeeService.saveEmployee(emp); 
+	}
+	
+	
+	
+	//dve metode ispod ne rade
 	@RequestMapping(value = "/deactivateemployee/{id}", method = RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody() 
@@ -54,12 +67,13 @@ public class EmployeeRestController {
 	       employee.get().setIsActive(false); 
 	       employeeService.saveEmployee(employee.get());
 	}  
-	@RequestMapping(value = "/activateemployee/{id}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/activateemployee/{id}", method = RequestMethod.PUT) 
 	@ResponseStatus(HttpStatus.OK)
 	   @ResponseBody()
 	   public void activateEmployee(@PathVariable ("id")  int id) { 
-		       Optional<Employee> employee = employeeService.findById(id);
-		       employee.get().setIsActive(false); 
+		       Optional<Employee> employee = employeeService.findById(id); 
+		       employee.get().setIsActive(true); 
+		       System.out.println(employee.get().getIsActive());
 		       employeeService.saveEmployee(employee.get());
 	} 
 	
