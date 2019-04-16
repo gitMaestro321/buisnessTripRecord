@@ -23,4 +23,5 @@ public class VehicleService {
 		vehicle.setIsAvailable(true);
 		return this.vehicleDao.save(vehicle);		
 	}
+	
 }

@@ -31,8 +31,7 @@ public class Bill implements Serializable {
 	@JoinColumn(name="TRAVEL_ORDER_ID")
 	private TravelOrder travelOrder;
 
-	public Bill() {
-		
+	public Bill() {	
 	}
 
 	public long getId() {
