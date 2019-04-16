@@ -12,6 +12,7 @@ import com.lab.software.engineering.businesstriporder.entity.Vehicle;
 
 @Service
 public class VehicleServiceImplement implements VehicleService {
+	
 	@Autowired
 	private VehicleDAO vehicleDao;
 	
@@ -25,32 +26,11 @@ public class VehicleServiceImplement implements VehicleService {
 
 	@Override
 	public Vehicle addVehicle(Vehicle vehicle) {
+		vehicle.setIsActive(true);
+		vehicle.setIsAvailable(true);
 		return this.vehicleDao.save(vehicle);		
 	}
 
 
-
-
-	
-	
-//	@Override
-//	@Transactional
-//	public Vehicle findById(int theId) {
-//		// TODO Auto-generated method stub
-//		return vehicleDAO.findById(theId)
-//	}
-//
-//	@Override
-//	@Transactional
-//	public void save(Vehicle theVehicle) {
-//		vehicleDAO.save(theVehicle);
-//
-//	}
-//
-//	@Override
-//	@Transactional
-//	public void deleteById(int theId) {
-//		vehicleDAO.deleteById(theId);
-//	}
 
 }

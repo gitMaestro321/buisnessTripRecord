@@ -8,5 +8,6 @@ public interface VehicleService {
 
 	public List<Vehicle> findAll();
 	public Vehicle addVehicle(Vehicle vehicle);
-		
-	}
+	
+	
+}
