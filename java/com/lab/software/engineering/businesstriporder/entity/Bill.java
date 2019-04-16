@@ -2,6 +2,9 @@ package com.lab.software.engineering.businesstriporder.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.math.BigDecimal;
 
  
@@ -19,10 +22,11 @@ public class Bill implements Serializable {
 	@Column(name="IMG_PATH")
 	private String imgPath;
 
-	@Column(name="\"SUM\"")
+	@Column(name="SUM")
 	private BigDecimal sum;
 
 	//bi-directional many-to-one association to TravelOrder
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="TRAVEL_ORDER_ID")
 	private TravelOrder travelOrder;
