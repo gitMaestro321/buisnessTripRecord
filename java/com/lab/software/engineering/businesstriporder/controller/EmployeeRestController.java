@@ -36,8 +36,7 @@ public class EmployeeRestController {
 	   public Employee addNewEmployee(@RequestBody Employee employee) {
 	       return this.employeeService.addEmployee(employee);
     }
-	
-<<<<<<< HEAD
+
 	@RequestMapping(value = "/deactivateemployee/{id}", method = RequestMethod.POST,   produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	   @ResponseBody()
 	   public Employee deativateEmployee(@PathVariable ("id")  int id) {
@@ -52,38 +51,8 @@ public class EmployeeRestController {
 	       employee.get().setIsActive(true);
 	       return employee.get();
 } 
-=======
-	@RequestMapping(value = "/updateemployee/{id}", method = RequestMethod.PUT,   produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	   @ResponseBody()
-	   public Employee updateEmployee(@PathVariable ("id")  int id) {
-		   Optional<Employee> employee = employeeService.findById(id); 
-	       employee.get().setIsActive(true);  
-	       employeeService.saveEmployee(employee.get());
-	       return employee.get();
-	} 
-	
-	@RequestMapping(value = "/deactivateemployee/{id}", method = RequestMethod.PUT)
-	@ResponseStatus(HttpStatus.OK)
-	@ResponseBody() 
-	   public void deativateEmployee(@PathVariable("id")  int id) {
-	       Optional<Employee> employee = employeeService.findById(id);
-	       employee.get().setIsActive(false); 
-	       employeeService.saveEmployee(employee.get());
-	}  
-	@RequestMapping(value = "/activateemployee/{id}", method = RequestMethod.PUT)
-	@ResponseStatus(HttpStatus.OK)
-	   @ResponseBody()
-	   public void activateEmployee(@PathVariable ("id")  int id) { 
-		       Optional<Employee> employee = employeeService.findById(id);
-		       employee.get().setIsActive(false); 
-		       employeeService.saveEmployee(employee.get());
-	} 
-	
-	
-	
-	
-	
-	
->>>>>>> cf6db99288d3515847d04ad943b8bd482dcbd3ce
+
+
+
 	
 }
