@@ -34,6 +34,10 @@ public class EmployeeService {
 	public void activateEmployee(Employee emp) {
 		emp.setIsActive(true);
 	}
+	 
+	public void saveEmployee(Employee emp) {
+		employeeDao.save(emp);
+	}
 	
 	
 }
