@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lab.software.engineering.businesstriporder.entity.Employee;
 import com.lab.software.engineering.businesstriporder.service.EmployeeService;
+import org.springframework.http.HttpStatus;
  
 
 @RestController
@@ -35,6 +37,7 @@ public class EmployeeRestController {
 	       return this.employeeService.addEmployee(employee);
     }
 	
+<<<<<<< HEAD
 	@RequestMapping(value = "/deactivateemployee/{id}", method = RequestMethod.POST,   produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	   @ResponseBody()
 	   public Employee deativateEmployee(@PathVariable ("id")  int id) {
@@ -49,5 +52,38 @@ public class EmployeeRestController {
 	       employee.get().setIsActive(true);
 	       return employee.get();
 } 
+=======
+	@RequestMapping(value = "/updateemployee/{id}", method = RequestMethod.PUT,   produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	   @ResponseBody()
+	   public Employee updateEmployee(@PathVariable ("id")  int id) {
+		   Optional<Employee> employee = employeeService.findById(id); 
+	       employee.get().setIsActive(true);  
+	       employeeService.saveEmployee(employee.get());
+	       return employee.get();
+	} 
+	
+	@RequestMapping(value = "/deactivateemployee/{id}", method = RequestMethod.PUT)
+	@ResponseStatus(HttpStatus.OK)
+	@ResponseBody() 
+	   public void deativateEmployee(@PathVariable("id")  int id) {
+	       Optional<Employee> employee = employeeService.findById(id);
+	       employee.get().setIsActive(false); 
+	       employeeService.saveEmployee(employee.get());
+	}  
+	@RequestMapping(value = "/activateemployee/{id}", method = RequestMethod.PUT)
+	@ResponseStatus(HttpStatus.OK)
+	   @ResponseBody()
+	   public void activateEmployee(@PathVariable ("id")  int id) { 
+		       Optional<Employee> employee = employeeService.findById(id);
+		       employee.get().setIsActive(false); 
+		       employeeService.saveEmployee(employee.get());
+	} 
+	
+	
+	
+	
+	
+	
+>>>>>>> cf6db99288d3515847d04ad943b8bd482dcbd3ce
 	
 }
