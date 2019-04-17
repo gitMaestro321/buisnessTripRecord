@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.lab.software.engineering.businesstriporder.entity.Vehicle;
 
 @Repository
-public interface VehicleDAO extends JpaRepository<Vehicle, Integer> {
+public interface VehicleDAO extends JpaRepository<Vehicle, Long> {
 	
 }

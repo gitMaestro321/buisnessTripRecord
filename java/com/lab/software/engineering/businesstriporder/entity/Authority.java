@@ -24,6 +24,7 @@ public class Authority implements Serializable {
 	private String role;
 
 	//bi-directional many-to-one association to Employee
+	
 	@OneToMany(mappedBy="authority")
 	@JsonIgnore
 	private List<Employee> employees;
