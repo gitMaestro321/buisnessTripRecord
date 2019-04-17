@@ -44,8 +44,7 @@ public class BillRestController {
 	
 	// Treba proveriti mozda nije dobra
 	@RequestMapping(value = "/editbill/{id}", method = RequestMethod.PUT)
-	public Bill editBillById(@PathVariable("id") Bill bill) {
-		
+	public Bill editBillById(@PathVariable("id") Bill bill) { 
 		return this.billService.save(bill);
 	}
 	

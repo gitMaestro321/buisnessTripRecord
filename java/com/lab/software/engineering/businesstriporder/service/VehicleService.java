@@ -57,8 +57,10 @@ public class VehicleService {
 	 * 
 	 * @param vehicle
 	 */
-	public void setAvailableVehicle(Vehicle vehicle) {
-		vehicle.setIsAvailable(true);
+	public void setAvailableVehicle(int id) {
+		Optional<Vehicle> vehicle = vehicleDao.findById((long)id);
+		vehicle.get().setIsAvailable(true);
+		vehicleDao.save(vehicle.get()); 
 	}
 
 	/**
@@ -66,9 +68,10 @@ public class VehicleService {
 	 * 
 	 * @param vehicle
 	 */
-	public void setUnAvailableVehicle(Vehicle vehicle) {
-		vehicle.setIsAvailable(true);
-		vehicleDao.save(vehicle);
+	public void setUnavailableVehicle(int id) {
+		Optional<Vehicle> vehicle = vehicleDao.findById((long)id);
+		vehicle.get().setIsAvailable(false);
+		vehicleDao.save(vehicle.get()); 
 	}
 
 	/**
@@ -81,7 +84,6 @@ public class VehicleService {
 		vehicle.get().setIsActive(false);
 		vehicle.get().setIsAvailable(false);
 		vehicleDao.save(vehicle.get());
-
 	}
 
 	/**
@@ -91,8 +93,8 @@ public class VehicleService {
 	 */
 	public void undoDeleteVehicle(long id) {
 		Optional<Vehicle> vehicle = vehicleDao.findById(id);
-		vehicle.get().setIsActive(true);
-		vehicle.get().setIsAvailable(true);
+		vehicle.get().setIsActive(false);
+		vehicle.get().setIsAvailable(false);
 		vehicleDao.save(vehicle.get());
 	}
 

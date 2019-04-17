@@ -44,36 +44,29 @@ public class VehicleRestController {
 	}
 
 	// Set available status of vehicle on TRUE
-	@RequestMapping(value = "/available/{id}", method = RequestMethod.PUT)
-	public void setAvailableVehicle(@PathVariable("id") long id) {
-		Optional<Vehicle> vehicle = vehicleService.findById(id);
-		vehicle.get().setIsAvailable(true);
-		vehicleService.save(vehicle.get());
+	@RequestMapping(value = "/vehicle/setavailable/{id}", method = RequestMethod.PUT)
+	public void setAvailableVehicle(@PathVariable("id") int id) { 
+		vehicleService.setAvailableVehicle(id);
 	}
 
 	// Set available status of vehicle on FALSE
-	@RequestMapping(value = "/unavailable/{id}", method = RequestMethod.PUT)
-	public void setUnAvailableVehicle(@PathVariable("id") long id) {
-		Optional<Vehicle> vehicle = vehicleService.findById(id);
-		vehicle.get().setIsAvailable(false);
-		vehicleService.save(vehicle.get());
+	@RequestMapping(value = "/vehicle/setunavailable/{id}", method = RequestMethod.PUT)
+	public void setUnvailableVehicle(@PathVariable("id") int id) { 
+		vehicleService.setUnavailableVehicle(id);
 	}
 
 	// Simulate deletitions vehicle by id in db, actualy change active and available
 	// status
-	@RequestMapping(value = "/deletevehicle/{id}", method = RequestMethod.PUT)
-	public void deleteVehicle(@PathVariable("id") long id) {
-		Optional<Vehicle> vehicle = vehicleService.findById(id);
-		vehicleService.deleteVehicle(vehicle.get().getId());
-
+	@RequestMapping(value = "/vehicle/deletevehicle/{id}", method = RequestMethod.PUT)
+	public void deleteVehicle(@PathVariable("id") int id) { 
+		vehicleService.deleteVehicle(id); 
 	}
 
 	// Simulate undo delete vehicle by id in db, actualy change active and available
 	// status
-	@RequestMapping(value = "/undeletevehicle/{id}", method = RequestMethod.PUT)
-	public void undoDeleteVehicle(@PathVariable("id") long id) {
-		Optional<Vehicle> vehicle = vehicleService.findById(id);
-		vehicleService.undoDeleteVehicle(vehicle.get().getId());
+	@RequestMapping(value = "/vehicle/undodeletevehicle/{id}", method = RequestMethod.PUT)
+	public void undoDeleteVehicle(@PathVariable("id") int id) { 
+		vehicleService.undoDeleteVehicle(id);
 	}
 
 	/**
