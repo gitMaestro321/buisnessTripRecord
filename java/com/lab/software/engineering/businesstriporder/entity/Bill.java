@@ -2,6 +2,9 @@ package com.lab.software.engineering.businesstriporder.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.math.BigDecimal;
 
  
@@ -24,7 +27,8 @@ public class Bill implements Serializable {
 
 	//bi-directional many-to-one association to TravelOrder
 	@ManyToOne
-	@JoinColumn(name="TRAVEL_ORDER_ID")
+	@JoinColumn(name="TRAVEL_ORDER_ID") 
+	@JsonIgnore
 	private TravelOrder travelOrder;
 
 	public Bill() {

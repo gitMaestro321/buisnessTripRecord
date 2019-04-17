@@ -41,7 +41,7 @@ public class Employee implements Serializable {
 
 	//bi-directional many-to-one association to TravelOrder 
 	@OneToMany(mappedBy="employee")
-	
+	@JsonIgnore
 	private List<TravelOrder> travelOrders;
 
 	public Employee() {

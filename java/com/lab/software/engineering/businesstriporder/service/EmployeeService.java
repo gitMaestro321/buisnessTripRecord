@@ -27,12 +27,22 @@ public class EmployeeService {
 		 
 	}
 	
-	public void deactivateEmployee(Employee emp) {
-		emp.setIsActive(false);
+	public Employee updateEmployee(int id, Employee emp) {
+		   emp.setId(id);
+		   this.saveEmployee(emp);
+	       return emp;
 	}
 	
-	public void activateEmployee(Employee emp) {
-		emp.setIsActive(true);
+	public void deactivateEmployee(int id) {
+		Optional <Employee> emp = this.findById(id);
+		emp.get().setIsActive(false);
+		this.saveEmployee(emp.get());
+	}
+	
+	public void activateEmployee(int id) {
+		Optional <Employee> emp = this.findById(id);
+		emp.get().setIsActive(true);
+		this.saveEmployee(emp.get());
 	}
 	 
 	public void saveEmployee(Employee emp) {

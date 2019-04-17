@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,49 +39,24 @@ public class EmployeeRestController {
 	       return this.employeeService.addEmployee(employee);
     }
 	
-	@RequestMapping(value = "/updateemployee/{id}", method = RequestMethod.PUT)
-	   @ResponseBody()
-	   public Employee updateEmployee(@PathVariable ("id")  int id) {
-		   Optional<Employee> employee = employeeService.findById(id); 
-	       employee.get().setIsActive(true);  
-	       employeeService.saveEmployee(employee.get());
-	       return employee.get();
-	} 
-	
-	
-	//updates the employee when the id is passed through the method parameter 
-	@RequestMapping(value = "/updateemployee", method = RequestMethod.PUT)
+	@RequestMapping(value = "/updateemployee/{id}", method = RequestMethod.POST,   produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	   @ResponseBody()
-	   public void updateEmployee(@RequestBody Employee emp) { 
-	       employeeService.saveEmployee(emp); 
-	}
-	
-	
-	
-	//dve metode ispod ne rade
+	@ResponseBody()
+	   public Employee updateEmployee(@RequestBody Employee emp, @PathVariable("id") int id) {
+		return this.employeeService.updateEmployee(id, emp);
+    }
+	 //if the employee has a vehicle, he cannot be deactivated, implement that mate
 	@RequestMapping(value = "/deactivateemployee/{id}", method = RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.OK)
-	@ResponseBody() 
-	   public void deativateEmployee(@PathVariable("id")  int id) {
-	       Optional<Employee> employee = employeeService.findById(id);
-	       employee.get().setIsActive(false); 
-	       employeeService.saveEmployee(employee.get());
+	   public ResponseEntity<?>  deativateEmployee(@PathVariable("id")  int id) { 
+	       employeeService.deactivateEmployee(id);
+	       return  ResponseEntity.ok().body("Employee has been deactivated.");
 	}  
 	@RequestMapping(value = "/activateemployee/{id}", method = RequestMethod.PUT) 
 	@ResponseStatus(HttpStatus.OK)
 	   @ResponseBody()
 	   public void activateEmployee(@PathVariable ("id")  int id) { 
-		       Optional<Employee> employee = employeeService.findById(id); 
-		       employee.get().setIsActive(true); 
-		       System.out.println(employee.get().getIsActive());
-		       employeeService.saveEmployee(employee.get());
+		   employeeService.activateEmployee(id);
 	} 
-	
-	
-	
-	
-	
-	
-	
+	  
 }
