@@ -2,6 +2,9 @@ package com.lab.software.engineering.businesstriporder.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.sql.Timestamp;
@@ -16,13 +19,14 @@ import java.util.List;
 @Table(name="TRAVEL_ORDER")
 @NamedQuery(name="TravelOrder.findAll", query="SELECT t FROM TravelOrder t")
 public class TravelOrder implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	private long id;
 
 	@Column(name="ACT_DISTANCE")
-	private BigDecimal actDistance;
+	private int actDistance;
 
 	@Lob
 	@Column(name="ADMIN_NOTE")
@@ -39,6 +43,7 @@ public class TravelOrder implements Serializable {
 	@Column(name="DATE_START")
 	private Date dateStart;
 
+	@Column(name="DESTINATION")
 	private String destination;
 
 	@Lob
@@ -46,31 +51,74 @@ public class TravelOrder implements Serializable {
 	private String empNote;
 
 	@Column(name="EST_DISTANCE")
-	private BigDecimal estDistance;
+	private int estDistance;
 
 	@Column(name="FUEL_CONSUMED")
-	private BigDecimal fuelConsumed;
+	private int fuelConsumed;
 
 	//bi-directional many-to-one association to Bill
 	@OneToMany(mappedBy="travelOrder")
+	@JsonIgnore
 	private List<Bill> bills;
 
 	//bi-directional many-to-one association to Employee
 	@ManyToOne
-	@JoinColumn(name="USER_ID")
+	@JoinColumn(name="USER_ID") 
+	@JsonIgnore
 	private Employee employee;
 
 	//bi-directional many-to-one association to TravelStatus
 	@ManyToOne
 	@JoinColumn(name="TRAVEL_STATUS_ID")
+	@JsonIgnore
 	private TravelStatus travelStatus;
 
 	//bi-directional many-to-one association to Vehicle
 	@ManyToOne
+	@JsonIgnore
 	private Vehicle vehicle;
 
 	public TravelOrder() {
 	}
+	
+	public TravelOrder(int actDistance, String adminNote, Timestamp createdAt, Date dateEnd, Date dateStart,
+			String destination, String empNote, int estDistance, int fuelConsumed, List<Bill> bills, Employee employee,
+			TravelStatus travelStatus, Vehicle vehicle) {
+		this.actDistance = actDistance;
+		this.adminNote = adminNote;
+		this.createdAt = createdAt;
+		this.dateEnd = dateEnd;
+		this.dateStart = dateStart;
+		this.destination = destination;
+		this.empNote = empNote;
+		this.estDistance = estDistance;
+		this.fuelConsumed = fuelConsumed;
+		this.bills = bills;
+		this.employee = employee;
+		this.travelStatus = travelStatus;
+		this.vehicle = vehicle;
+	}
+	
+	public TravelOrder(long id, int actDistance, String adminNote, Timestamp createdAt, Date dateEnd, Date dateStart,
+			String destination, String empNote, int estDistance, int fuelConsumed, List<Bill> bills, Employee employee,
+			TravelStatus travelStatus, Vehicle vehicle) {
+		this.id = id;
+		this.actDistance = actDistance;
+		this.adminNote = adminNote;
+		this.createdAt = createdAt;
+		this.dateEnd = dateEnd;
+		this.dateStart = dateStart;
+		this.destination = destination;
+		this.empNote = empNote;
+		this.estDistance = estDistance;
+		this.fuelConsumed = fuelConsumed;
+		this.bills = bills;
+		this.employee = employee;
+		this.travelStatus = travelStatus;
+		this.vehicle = vehicle;
+	}
+
+
 
 	public long getId() {
 		return this.id;
@@ -80,11 +128,11 @@ public class TravelOrder implements Serializable {
 		this.id = id;
 	}
 
-	public BigDecimal getActDistance() {
+	public int getActDistance() {
 		return this.actDistance;
 	}
 
-	public void setActDistance(BigDecimal actDistance) {
+	public void setActDistance(int actDistance) {
 		this.actDistance = actDistance;
 	}
 
@@ -136,19 +184,19 @@ public class TravelOrder implements Serializable {
 		this.empNote = empNote;
 	}
 
-	public BigDecimal getEstDistance() {
+	public int getEstDistance() {
 		return this.estDistance;
 	}
 
-	public void setEstDistance(BigDecimal estDistance) {
+	public void setEstDistance(int estDistance) {
 		this.estDistance = estDistance;
 	}
 
-	public BigDecimal getFuelConsumed() {
+	public int getFuelConsumed() {
 		return this.fuelConsumed;
 	}
 
-	public void setFuelConsumed(BigDecimal fuelConsumed) {
+	public void setFuelConsumed(int fuelConsumed) {
 		this.fuelConsumed = fuelConsumed;
 	}
 

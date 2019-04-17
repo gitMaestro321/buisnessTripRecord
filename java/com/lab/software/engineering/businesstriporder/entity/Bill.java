@@ -28,7 +28,8 @@ public class Bill implements Serializable {
 	//bi-directional many-to-one association to TravelOrder
 	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name="TRAVEL_ORDER_ID")
+	@JoinColumn(name="TRAVEL_ORDER_ID") 
+	
 	private TravelOrder travelOrder;
 
 	public Bill() {	
