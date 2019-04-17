@@ -10,11 +10,7 @@ import java.util.Date;
 import java.sql.Timestamp;
 import java.util.List;
 
-
-/**
- * The persistent class for the TRAVEL_ORDER database table.
- * 
- */
+ 
 @Entity
 @Table(name="TRAVEL_ORDER")
 @NamedQuery(name="TravelOrder.findAll", query="SELECT t FROM TravelOrder t")
@@ -23,6 +19,7 @@ public class TravelOrder implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private long id;
 
 	@Column(name="ACT_DISTANCE")
@@ -64,18 +61,17 @@ public class TravelOrder implements Serializable {
 	//bi-directional many-to-one association to Employee
 	@ManyToOne
 	@JoinColumn(name="USER_ID") 
-	@JsonIgnore
+	
 	private Employee employee;
 
 	//bi-directional many-to-one association to TravelStatus
 	@ManyToOne
-	@JoinColumn(name="TRAVEL_STATUS_ID")
-	@JsonIgnore
+	@JoinColumn(name="TRAVEL_STATUS_ID") 
 	private TravelStatus travelStatus;
 
 	//bi-directional many-to-one association to Vehicle
 	@ManyToOne
-	@JsonIgnore
+	
 	private Vehicle vehicle;
 
 	public TravelOrder() {
@@ -117,9 +113,7 @@ public class TravelOrder implements Serializable {
 		this.travelStatus = travelStatus;
 		this.vehicle = vehicle;
 	}
-
-
-
+ 
 	public long getId() {
 		return this.id;
 	}

@@ -1,6 +1,9 @@
 package com.lab.software.engineering.businesstriporder.entity;
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 
@@ -21,10 +24,22 @@ public class TravelStatus implements Serializable {
 
 	//bi-directional many-to-one association to TravelOrder
 	@OneToMany(mappedBy="travelStatus")
+	@JsonIgnore
 	private List<TravelOrder> travelOrders;
 
 	public TravelStatus() {
-	}
+	} 
+
+	public TravelStatus(long id, String name, List<TravelOrder> travelOrders) { 
+		this.id = id;
+		this.name = name;
+		this.travelOrders = travelOrders;
+	} 
+
+	public TravelStatus(String name, List<TravelOrder> travelOrders) { 
+		this.name = name;
+		this.travelOrders = travelOrders;
+	} 
 
 	public long getId() {
 		return this.id;
@@ -53,7 +68,6 @@ public class TravelStatus implements Serializable {
 	public TravelOrder addTravelOrder(TravelOrder travelOrder) {
 		getTravelOrders().add(travelOrder);
 		travelOrder.setTravelStatus(this);
-
 		return travelOrder;
 	}
 
