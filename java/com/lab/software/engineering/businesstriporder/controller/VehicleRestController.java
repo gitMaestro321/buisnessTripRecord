@@ -29,13 +29,13 @@ public class VehicleRestController {
 		return vehicleService.findAll();
 	}
 
-	//Shows vehicle by id 
+	// Shows vehicle by id
 	@GetMapping("/vehicles/{id}")
 	public Optional<Vehicle> getById(@PathVariable("id") long id) {
 		return vehicleService.findById(id);
 	}
-	
-	//Add new vehicle
+
+	// Add new vehicle
 	@RequestMapping(value = "/addvehicle", method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
 	@ResponseBody()
@@ -65,7 +65,7 @@ public class VehicleRestController {
 	public void deleteVehicle(@PathVariable("id") long id) {
 		Optional<Vehicle> vehicle = vehicleService.findById(id);
 		vehicleService.deleteVehicle(vehicle.get().getId());
-		
+
 	}
 
 	// Simulate undo delete vehicle by id in db, actualy change active and available
@@ -75,17 +75,20 @@ public class VehicleRestController {
 		Optional<Vehicle> vehicle = vehicleService.findById(id);
 		vehicleService.undoDeleteVehicle(vehicle.get().getId());
 	}
-	
+
 	/**
 	 * List of all available vehicles
+	 * 
 	 * @return List
 	 */
 	@GetMapping("/avaliablevehicles")
 	public List<Vehicle> findAllAvailable() {
 		return vehicleService.findAllAvailable();
 	}
+
 	/**
 	 * List of all unavailable vehicles
+	 * 
 	 * @return List
 	 */
 	@GetMapping("/unavaliablevehicles")

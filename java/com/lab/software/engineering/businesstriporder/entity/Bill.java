@@ -2,11 +2,6 @@ package com.lab.software.engineering.businesstriporder.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import java.math.BigDecimal;
-
  
 @Entity
 @NamedQuery(name="Bill.findAll", query="SELECT b FROM Bill b")
@@ -14,19 +9,20 @@ public class Bill implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private long id;
 
 	@Column(name="BILL_NUM")
-	private BigDecimal billNum;
+	private int billNum;
 
 	@Column(name="IMG_PATH")
 	private String imgPath;
 
 	@Column(name="SUM")
-	private BigDecimal sum;
+	private double sum;
 
 	//bi-directional many-to-one association to TravelOrder
-	@JsonIgnore
+	
 	@ManyToOne
 	@JoinColumn(name="TRAVEL_ORDER_ID") 
 	
@@ -43,11 +39,11 @@ public class Bill implements Serializable {
 		this.id = id;
 	}
 
-	public BigDecimal getBillNum() {
+	public int getBillNum() {
 		return this.billNum;
 	}
 
-	public void setBillNum(BigDecimal billNum) {
+	public void setBillNum(int billNum) {
 		this.billNum = billNum;
 	}
 
@@ -59,11 +55,11 @@ public class Bill implements Serializable {
 		this.imgPath = imgPath;
 	}
 
-	public BigDecimal getSum() {
+	public double getSum() {
 		return this.sum;
 	}
 
-	public void setSum(BigDecimal sum) {
+	public void setSum(double sum) {
 		this.sum = sum;
 	}
 

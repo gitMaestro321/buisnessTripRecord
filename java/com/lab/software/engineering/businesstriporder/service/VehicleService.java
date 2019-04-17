@@ -7,7 +7,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 import com.lab.software.engineering.businesstriporder.dao.VehicleDAO;
 import com.lab.software.engineering.businesstriporder.entity.Vehicle;
 
@@ -78,11 +77,11 @@ public class VehicleService {
 	 * @param vehicle
 	 */
 	public void deleteVehicle(long id) {
-		Optional <Vehicle> vehicle = vehicleDao.findById(id);
+		Optional<Vehicle> vehicle = vehicleDao.findById(id);
 		vehicle.get().setIsActive(false);
 		vehicle.get().setIsAvailable(false);
 		vehicleDao.save(vehicle.get());
-		
+
 	}
 
 	/**
@@ -91,44 +90,45 @@ public class VehicleService {
 	 * @param vehicle
 	 */
 	public void undoDeleteVehicle(long id) {
-		Optional <Vehicle> vehicle = vehicleDao.findById(id);
+		Optional<Vehicle> vehicle = vehicleDao.findById(id);
 		vehicle.get().setIsActive(true);
 		vehicle.get().setIsAvailable(true);
 		vehicleDao.save(vehicle.get());
 	}
-	
+
 	/**
 	 * All available vehicles
+	 * 
 	 * @return list
 	 */
-	
+
 	public List<Vehicle> findAllAvailable() {
 		List<Vehicle> allVehicles = vehicleDao.findAll();
-		List<Vehicle> allAvailableVehicles =  new ArrayList<>();
-		
-		for (int i=0; i < allVehicles.size(); i++) {
-			if(allVehicles.get(i).getIsAvailable()==true) {
+		List<Vehicle> allAvailableVehicles = new ArrayList<>();
+
+		for (int i = 0; i < allVehicles.size(); i++) {
+			if (allVehicles.get(i).getIsAvailable() == true) {
 				allAvailableVehicles.add(allVehicles.get(i));
 			}
 		}
 		return allAvailableVehicles;
 	}
-	
-/**
- * Returns ona available vehicles based on status
- * @return 
- */
+
+	/**
+	 * Returns ona available vehicles based on status
+	 * 
+	 * @return
+	 */
 	public List<Vehicle> findAllUnAvailable() {
 		List<Vehicle> allVehicles = vehicleDao.findAll();
-		List<Vehicle> allAvailableVehicles =  new ArrayList<>();
-		
-		for (int i=0; i < allVehicles.size(); i++) {
-			if(allVehicles.get(i).getIsAvailable()==false) {
+		List<Vehicle> allAvailableVehicles = new ArrayList<>();
+
+		for (int i = 0; i < allVehicles.size(); i++) {
+			if (allVehicles.get(i).getIsAvailable() == false) {
 				allAvailableVehicles.add(allVehicles.get(i));
 			}
 		}
 		return allAvailableVehicles;
 	}
-	
-	
+
 }

@@ -1,6 +1,7 @@
 package com.lab.software.engineering.businesstriporder.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,24 @@ public class BillService {
 		return billDao.findAll();
 	}
 	
-	public Bill addBill(Bill bill) {
+	/**
+	 * Insert new bill for trade order
+	 * @param bill
+	 * @return added bill
+	 */
+	public Bill save(Bill bill) {
 		return billDao.save(bill);
 	}
+	
+	/**
+	 * Update one bil
+	 * @param bill
+	 * @return
+	 */
+	public Bill updatebill(Bill bill) {
+		Optional<Bill> oneBill = billDao.findById((int)bill.getId());
+		return billDao.save(oneBill.get());
+	}
+	
+
 }
