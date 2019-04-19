@@ -1,5 +1,6 @@
 package com.lab.software.engineering.businesstriporder.service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -20,7 +21,8 @@ public class TravelOrderService {
 		return travelOrderDao.findAll();
 	} 
  
-	public TravelOrder addTravelOrder(TravelOrder travelOrder) { 
+	public TravelOrder addTravelOrder(TravelOrder travelOrder) {
+		travelOrder.setCreatedAt(new Timestamp(System.currentTimeMillis()));
 		return this.travelOrderDao.save(travelOrder);		
 	}
 	
